@@ -1,0 +1,94 @@
+<script>
+
+    $(document).ready(function () {
+        $('#summernote').summernote({ width: 500, height: 100, });
+        $('#summernote').summernote('code', `{{{product.content}}}`);
+    });
+
+
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+
+
+</script>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2" style="margin: auto;">
+                <img src="{{product.image_link}}" alt="Product Image" id="imgimg"
+                    style="margin: auto; width: 70%; height: 80%">
+            </div>
+            <div class="col-sm-10">
+                <form action="/admin/products/{{product._id}}/update" method="post">
+                    <div style="text-align: center; margin-bottom:50px; margin-top:50px">
+                        <h1>Product Control</h1>
+                    </div>
+                    <div class="form-group" style="margin: auto; width: 35%; padding: 20px">
+                        <div class="custom-file">
+
+                            <label for="productname">Product Name:</label>
+                            <input type="text" class="form-control" id="productname" name="productname"
+                                style="width: 500px; margin: auto;" value="{{product.productname}}">
+                            <label for="price">Price:</label>
+                            <input type="text" class="form-control" id="price" name="price"
+                                style="width: 500px; margin: auto;" value="{{product.price}}">
+
+                            <div class="custom-file" style="margin-top:20px; margin-bottom:20px">
+                                <label for="image"></label>
+                                <input type="file" class="custom-file-input" id="customFileInput" name="image"
+                                    aria-describedby="customFileInput" onchange="getBaseUrl()">
+                                <label class="custom-file-label" for="customFileInput">Select file</label>
+                                <input type="textarea" name="image_link" id="image_link" value="{{product.image_link}}"
+                                    hidden>
+
+                                <script>
+                                    document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+                                        var name = document.getElementById("customFileInput").files[0].name;
+                                        var nextSibling = e.target.nextElementSibling
+                                        nextSibling.innerText = name    
+                                    })
+
+                                    function getBaseUrl() {
+                                        var file = document.querySelector('input[type=file]')['files'][0];
+                                        var reader = new FileReader();
+                                        var baseString;
+                                        reader.onloadend = function () {
+                                            baseString = reader.result;
+                                            document.getElementById('image_link').value = baseString;
+                                            document.getElementById('imgimg').src = baseString;
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                </script>
+
+                            </div>
+
+                            <br>
+                            <label for="catalog_id">Category:</label>
+                            <select class="form-control form-control-sm" id="catalog_id" name="catalogid"
+                                style="width: 500px;">
+                                <option disabled selected>
+                                    <-- Select catalog of product -->
+                                </option>
+                                {{#each catalogs}}
+                                <option value="{{this._id}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                            <br>
+                            <label for="name" style="margin:auto;">Content:</label>
+                            <!-- <textarea class="form-control" id="content" name="content" rows="5" style="width: 500px; margin: auto;"></textarea> -->
+                            <textarea id="summernote" name="content"></textarea>
+                            <button type="submit" class="btn btn-success" id="confirm" name="Confirm"
+                                style="margin-top: 20px; float:right;">Confirm</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

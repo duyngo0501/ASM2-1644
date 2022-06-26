@@ -1,0 +1,37 @@
+<main style="padding: 30px;">
+        <div style="text-align: center; margin-bottom:20px; margin-top:20px">
+            <h1>Finished Orders</h1>
+        </div>
+        <br>
+    <br>
+
+        <!-- Transaction table -->
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Payment Info</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each transactions}}
+            {{#each this.Products}}
+            <tr>
+                    <td>{{this.username}}</td>
+                    <td>{{this.payment_info}}</td>
+                    <td>{{this.productname}}</td>
+                    <td>{{this.amount}}</td>
+                    <td>{{this.total}} $</td>
+                    <td>{{this.statusString}}</td>
+                </tr>
+            {{/each}}
+            {{/each}}
+        </tbody>
+        </table>
+        <!-- End of Transaction Table -->
+        
+    </main>

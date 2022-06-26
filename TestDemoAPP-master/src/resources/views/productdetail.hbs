@@ -1,0 +1,41 @@
+<main>
+    <div class="container-fluid" style="margin-top:20px;">
+        <ol class="breadcrumb">
+            <!--INSERT DIRECTORY ? Home/Category/Productdetails-->
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a 
+                    href="/products/{{Object.catalog.name}}">{{Object.catalog.name}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a style="color: inherit;"
+                    href="/product/{{Object.product.slug}}">{{Object.product.productname}}</a></li>
+            <!--EOF get DIRECTORY-->
+        </ol>
+    </div>
+
+
+    <div class="container-fluid" style="padding: 10px 20px 10px 100px;">
+        <div class="row">
+            <div class="col-md-5">
+                <!--Image source here-->
+                <img style="width:80%; object-fit:cover; margin-top: 20px;"
+                    src="{{Object.product.image_link}}" alt="insert image here">
+                <!--EOF image source-->
+            </div>
+
+            <div class="col-md-7">
+                <!--Product Detail ? Name _> Price-->
+                <h2 style="margin: 20px; font-size: 50px;">{{Object.product.productname}}</h2>
+                <h6 style="margin: 20px;"><strong>{{Object.product.price}} $</strong></h6>
+                <form method="POST" action="/product/{{Object.product.slug}}">
+                    <button class="btn btn-info" style="width: 400px; font-size:30px;" name="add" type="submit">ADD TO
+                        CART</button>
+                </form>
+                <br /><br />
+                <div style="width: 400px;">
+                    <!-- Content Detail -->
+                    <span>{{{Object.product.content}}}</span>
+                    <!-- EOF Content Detail -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,32 @@
+<h2 style="text-align: center; padding-top:20px">Admin login panel</h2>
+
+<form action="/admin/check" method="post">
+    <div class="imgcontainer">
+        <img src="https://vi-magento.com/wp-content/uploads/2020/09/ASSET-USER-ADMIN.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter your username" name="username" required>
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" id="password"  placeholder="Enter Password" name="password" required>
+
+        <label for="checkbox"></label>
+        <input type="checkbox" name="checkbox" style="width: auto;" onclick="myFunction()"> Show Password
+        <script defer>
+            function myFunction() {
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
+
+        <label for="password"><b>{{error}}</b></label>
+
+        <button type="submit" name="login" id="login">Login</button>
+    </div>
+</form>

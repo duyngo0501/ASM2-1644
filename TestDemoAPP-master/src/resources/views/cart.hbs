@@ -1,0 +1,95 @@
+<main>
+    <div class="container-fluid" style="margin-top:20px;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a style="color: inherit;" href="/cart>">Cart</a>
+            </li>
+
+        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8" style="padding: 30px 0px 0px 50px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="background-color: #b1f2d9;">
+                        <th>No</th>
+                        <th>Thumbnail</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Num</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Insert cart items here -->
+                    {{#each Object.products}}
+                    <tr>
+                        <td>{{sum @index 1}}</td>
+                        <td><img src="{{this.image_link}}" style="width: 100px" alt="product image here"></td>
+                        <td>{{this.productname}}</td>
+                        <td>{{this.price}} $</td>
+                        <td>{{this.amount}}</td>
+                        <td>{{this.total}} $</td>
+                        <td><a href="/cart/deletecart?productname={{this.productname}}"><i
+                                    class="far fa-trash-alt"></i></a></td>
+                    </tr>
+                    {{/each}}
+                    <!-- EOF insert card items-->
+                </tbody>
+            </table>
+            <p style="font-size: 26px; color: red; text-align:right; padding-right:20px">
+                <strong>Total:</strong>{{Object.carttotal}} $
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <!-- Insert user data if the account is logged in-->
+            {{#if WebUser}}
+            <div class="container sticky-top" style="margin-top:10%; text-align:center;">
+                <h4><strong>usr's checkout info</strong></h4>
+                <form action="/cart/newTransaciton" method="post" style="margin-top: 5%;">
+                    <div class="form-group">
+                        <input type="text" style="width: 300px; margin:auto;" class="form-control" value="{{Object.user.name}}"
+                            name="name" id="name" placeholder="Your name..." disabled required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" style="width: 300px; margin:auto;" class="form-control" value="{{Object.user.email}}"
+                            name="email" id="email" placeholder="Your email address..." disabled required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" style="width: 300px; margin:auto;" class="form-control"
+                            value="{{Object.user.phone}}" name="phone" id="phone" placeholder="Your phone number..."
+                            disabled required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" style="width: 300px; margin:auto;" class="form-control"
+                            value="{{Object.user.address}}" name="address" id="address" placeholder="Your address..." disabled
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-group form-control form-control-md" id="payment_info" name="payment_info"
+                            style="width: 300px; margin:auto;">
+                            <option>Bank</option>
+                            <option>Cash</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" name="check_out" type="submit" onclick="$('.alert').alert()">
+                            Submit your order.
+                        </button>
+                    </div>
+                </form>
+            </div>
+            {{else}}
+            <div class="container" style="margin-top:50%; text-align:center;">
+                <button type="button" class="btn btn-primary btn-round" data-toggle="modal" data-target="#loginModal">
+                    Please login to checkout order
+                </button>
+            </div>
+            {{/if}}
+            <!--EOF insert user data -->
+            <!-- IF is not logged in ask user to login -->
+        </div>
+    </div>
+</main>

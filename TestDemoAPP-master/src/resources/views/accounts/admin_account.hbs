@@ -1,0 +1,54 @@
+<main style="padding: 30px;">
+    <div style="text-align: center; margin-bottom:20px; margin-top:20px">
+        <h1>Account Management (admin)</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-6" style="margin-top: 20px; margin-bottom:20px">
+            <a href="/admin/accounts/add">
+                <button type="submit" class="btn btn-primary">Add new account</button>
+            </a>           
+        </div>
+        <div class="col-lg-6">
+            <form action="/admin/accounts/admin-Accounts" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by username" id="search" name="search"
+                        style="width: 500px; float:right; margin-top: 10px">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Account table -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>username</th>
+                <th>status</th>
+                <th>password</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Insert admin data here -->
+            {{#each Admin_accounts}}
+
+            <tr>
+                <td>{{sum @index 1}}</td>
+                <td>{{this.username}}</td>
+                <td>{{this.status}}</td>
+                <td>md5 - ({{this.password}})</td>
+                <td><a href="/admin/accounts/{{this._id}}/edit">Edit</a></td>
+                <td><a href="/admin/accounts/{{this._id}}/delete" onclick="return confirm_alert(this);">Delete</a></td>
+            </tr>
+
+            {{/each}}
+
+            
+            <!-- EOF admin data -->
+        </tbody>
+    </table>
+    <!-- End of Account Table -->
+    
+</main>

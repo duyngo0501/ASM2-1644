@@ -1,0 +1,77 @@
+<main style="padding: 30px;">
+    <div style="text-align: center; margin-bottom:20px; margin-top:20px">
+        <h1>All Orders</h1>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Transaction table -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>User Name</th>
+                <th>Payment Info</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {{#if transaction}}
+            {{#each transaction.Products}}
+            <tr>
+                <td>{{this.trans_id}}</td>
+                <td>{{{this.username}}}</td>
+                <td>{{{this.payment_info}}}</td>
+                <td>{{this.productname}}</td>
+                <td>{{this.amount}}</td>
+                <td>{{this.total}} $</td>
+                <td>{{this.statusString}} </td>
+                {{#if this.AcceptOrder}}
+                <td></td>
+                {{else}}
+                <td><a href="/admin/orders/{{this.trans_id}}/{{this._id}}/updateStatus"
+                        onclick="return confirm_alert(this);">Accept Order</a></td>
+                {{/if}}
+            </tr>
+            {{/each}}
+            {{else}}
+            {{#if transactions}}
+            {{#each transactions}}
+
+            {{#each this.Products}}
+            <tr>
+                <td>{{this.trans_id}}</td>
+                <td>{{{this.username}}}</td>
+                <td>{{{this.payment_info}}}</td>
+                <td>{{this.productname}}</td>
+                <td>{{this.amount}}</td>
+                <td>{{this.total}} $</td>
+                <td>{{this.statusString}} </td>
+                {{#if this.AcceptOrder}}
+                <td></td>
+                {{else}}
+                <td><a href="/admin/orders/{{this.trans_id}}/{{this._id}}/updateStatus"
+                        onclick="return confirm_alert(this);">Accept Order</a></td>
+                {{/if}}
+
+            </tr>
+            {{/each}}
+
+            {{/each}}
+            {{/if}}
+            {{/if}}
+
+        </tbody>
+    </table>
+    <!-- End of Transaction Table -->
+    {{!-- <ul class="pagination" style="justify-content: center;">
+
+        <li class="page-item active"><a class="page-link" href="?page=1">1</a></li>
+    </ul> --}}
+</main>

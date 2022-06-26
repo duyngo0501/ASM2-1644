@@ -1,0 +1,62 @@
+<main style="padding: 30px;">
+    <div style="text-align: center; margin-bottom:20px; margin-top:20px">
+        <h1>Product Management</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-6" style="margin-top: 20px; margin-bottom:20px">
+            <form action="/admin/products/add" method="get">
+                <button type="submit" class="btn btn-primary">Add new product</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <form action="/admin/products" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by product's name" id="search" name="search"
+                        style="width: 500px; float:right; margin-top: 10px">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product table -->
+    <table class="table table-hover" id="products">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Thumbnail</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Catalog</th>
+                <th>Content</th>
+                <th>View</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+            <tr>
+                <td>{{sum @index 1}}</td>
+                <td><img src="{{this.image_link}}" alt="Product image here" style="width: 100%"></td>
+                <td>{{this.productname}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.catalogid}}</td>
+                <td>
+                    {{{this.content}}}
+                </td>
+                <td>{{this.view}}</td>
+                <td><a href="/admin/products/{{this._id}}/edit">Edit</a></td>
+                <td><a href="/admin/products/{{this._id}}/delete" onclick="return confirm_alert(this);">Delete</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <!-- End of Product Table -->
+    {{!-- <ul class="pagination" style="justify-content: center;">
+
+        <li class="page-item active"><a class="page-link" href="?page=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+        <li class="page-item"><a class="page-link" href="?page=4">4</a></li>
+        <li class="page-item"><a class="page-link" href="?page=2">Next</a></li>
+    </ul> --}}
+</main>

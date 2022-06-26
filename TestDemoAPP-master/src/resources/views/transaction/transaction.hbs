@@ -1,0 +1,44 @@
+<main style="padding: 30px;">
+    <div style="text-align: center; margin-bottom:20px; margin-top:20px">
+        <h1>Transaction Management</h1>
+    </div>
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-lg-6 ml-auto">
+            <form action="/admin/transaction" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search by name, email, phone number" id="search" name="search"
+                        style="width: 500px; float:right; margin-top: 10px">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transaction table -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Payment Info</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each transactions}}
+            <tr>
+                <td><a href="/admin/orders/{{this._id}}">{{this._id}}</a></td>
+                <td>{{this.user.name}}</td>
+                <td>{{this.user.email}}</td>
+                <td>{{this.user.phone}}</td>
+                <td>{{this.payment_info}}</td>
+                <td>{{this.total}} $</td>
+            </tr>
+            {{/each}}
+        </tbody>
+
+    </table>
+    <!-- End of Transaction Table -->
+   
+</main>

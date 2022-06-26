@@ -1,0 +1,64 @@
+<main>
+    <!-- Show Directory ? Home/Category -->
+    <div class="container-fluid" style="margin-top:20px;">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a style="color: inherit;"
+                    href="/products/{{Object.catalog.name}}">{{Object.catalog.name}}</a></li>
+        </ol>
+    </div>
+    <!--EOF Show Directory-->
+
+    <!-- show by CARD -->
+
+    <div class="container">
+        <div class="row">
+            <!-- Insert Here -->
+            {{#each Object.products}}
+            <div class="col-md-3" style="margin-top: 20px;">
+                <div class="card" style="width: 100%; height: 100%">
+                    <a style="margin:auto; margin-top:5px" href="/product/{{this.slug}}"><img class="card-img-top"
+                            style="width:100%; height:300px; object-fit:contain;" src="{{this.image_link}}"
+                            alt="Card image cap"></a>
+                    <div class="card-body">
+                        <a style="color: inherit;" href="#">
+                            <p class="card-text">{{this.productname}}</p>
+                            <a style="color: inherit;" href="#">
+                                <h5>{{this.price}} $</h5>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <!--EOF Insert -->
+        </div>
+    </div>
+
+    <!-- END OF SHOW BY CARD -->
+
+    <!-- PAGINATION -->
+
+
+    
+        <div class="container" style="text-align: center;">
+            <ul class="pagination">
+            {{#paginate pagination type="first"}}
+            <li {{#if disabled}}class="disabled" {{/if}}><a href="?page={{n}}">First</a></li>
+            {{/paginate}}
+            {{#paginate pagination type="previous"}}
+            <li {{#if disabled}}class="disabled" {{/if}}><a href="?page={{n}}">Prev</a></li>
+            {{/paginate}}
+            {{#paginate pagination type="middle" limit="7"}}
+            <li {{#if active}}class="active" {{/if}}><a href="?page={{n}}">{{n}}</a></li>
+            {{/paginate}}
+            {{#paginate pagination type="next"}}
+            <li {{#if disabled}}class="disabled" {{/if}}><a href="?page={{n}}">Next</a></li>
+            {{/paginate}}
+            {{#paginate pagination type="last"}}
+            <li {{#if disabled}}class="disabled" {{/if}}><a href="?page={{n}}">Last</a></li>
+            {{/paginate}}
+        </ul>
+        </div>
+
+
+
+</main>
